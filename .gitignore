@@ -8,3 +8,6 @@ venv/
 
 # Scratch files
 1.py
+
+# Streamlit secrets (Never commit secrets to GitHub)
+.streamlit/secrets.toml

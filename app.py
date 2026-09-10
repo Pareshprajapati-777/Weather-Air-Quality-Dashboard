@@ -6,6 +6,7 @@ import pandas as pd
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
+import os
 
 
 # ============================================================
@@ -167,10 +168,23 @@ nh3 = []
 
 
 # ============================================================
-# API
-# IMPORTANT: For public repositories, use an environment variable
-# instead of hard-coding the OpenWeather API key.
-api = "YOUR_OPENWEATHER_API_KEY"
+# API CONFIGURATION (SECURE)
+# ============================================================
+
+# Fetch API key securely from Streamlit secrets (.streamlit/secrets.toml) or environment variables
+api = None
+try:
+    if "OPENWEATHER_API_KEY" in st.secrets:
+        api = st.secrets["OPENWEATHER_API_KEY"]
+except Exception:
+    pass
+
+if not api:
+    api = os.getenv("OPENWEATHER_API_KEY", "")
+
+if not api or api == "YOUR_OPENWEATHER_API_KEY":
+    st.error("⚠️ **OpenWeather API Key missing!** Please add your key to `.streamlit/secrets.toml` or set the `OPENWEATHER_API_KEY` environment variable.")
+    st.stop()
 
 lat = [
     "23.0225",

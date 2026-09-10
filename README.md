@@ -61,9 +61,20 @@ pip install -r requirements.txt
 
 ### 3️⃣ Configure the OpenWeather API key 🔑
 
-Create an API key from OpenWeather and configure it securely. Do **not** publish a real API key in the source code or commit it to GitHub.
+Create `.streamlit/secrets.toml` (you can copy `.streamlit/secrets.toml.example`):
 
-For local development, the application can be configured to read the key from an environment variable or Streamlit secrets.
+```toml
+OPENWEATHER_API_KEY = "your_actual_openweather_api_key"
+```
+
+Alternatively, set the environment variable:
+```bash
+# Windows (PowerShell)
+$env:OPENWEATHER_API_KEY="your_actual_openweather_api_key"
+
+# Linux / macOS
+export OPENWEATHER_API_KEY="your_actual_openweather_api_key"
+```
 
 ### 4️⃣ Run the dashboard ▶️
 
