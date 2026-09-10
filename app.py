@@ -1,11 +1,12 @@
 # Run:
-# python -m streamlit run weather.py
+# python -m streamlit run app.py
 
 import requests
 import pandas as pd
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
+
 
 # ============================================================
 # PAGE CONFIG
@@ -17,6 +18,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
 
 # ============================================================
 # CUSTOM CSS
@@ -121,6 +123,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
 # ============================================================
 # HEADER
 # ============================================================
@@ -134,6 +137,7 @@ st.markdown(
     '<div class="sub-title">Real-Time Weather, AQI & Air Pollution Monitoring</div>',
     unsafe_allow_html=True
 )
+
 
 # ============================================================
 # DATA LISTS
@@ -161,10 +165,9 @@ pm2_5 = []
 pm10 = []
 nh3 = []
 
+
 # ============================================================
 # API
-# ============================================================
-
 # IMPORTANT: For public repositories, use an environment variable
 # instead of hard-coding the OpenWeather API key.
 api = "YOUR_OPENWEATHER_API_KEY"
@@ -194,6 +197,7 @@ lon = [
     "73.6143",
     "72.8631"
 ]
+
 
 # ============================================================
 # API DATA FETCH
@@ -290,6 +294,7 @@ with st.spinner("🌐 Fetching weather & air quality data..."):
                 f"⚠️ Failed to fetch data for location {i + 1}: {e}"
             )
 
+
 # ============================================================
 # WEATHER DATAFRAME
 # ============================================================
@@ -308,6 +313,7 @@ data = {
     "Humidity (%)": hum
 }
 
+
 # ============================================================
 # AIR QUALITY DATAFRAME
 # ============================================================
@@ -324,8 +330,10 @@ data1 = {
     "Ammonia": nh3
 }
 
+
 df = pd.DataFrame(data)
 df1 = pd.DataFrame(data1)
+
 
 # ============================================================
 # FINAL DATAFRAME
@@ -338,6 +346,7 @@ final_df = pd.concat(
 
 final_df["Latitude"] = [float(x) for x in lat[:len(final_df)]]
 final_df["Longitude"] = [float(x) for x in lon[:len(final_df)]]
+
 
 # ============================================================
 # DASHBOARD METRICS
@@ -403,6 +412,7 @@ if not final_df.empty:
             unsafe_allow_html=True
         )
 
+
 # ============================================================
 # FULL DATA TABLE
 # ============================================================
@@ -417,6 +427,7 @@ st.dataframe(
     use_container_width=True,
     hide_index=True
 )
+
 
 # ============================================================
 # AQI FUNCTION
@@ -457,6 +468,7 @@ def get_aqi_text(aqi_value):
     else:
         return "Very Poor"
 
+
 # ============================================================
 # FOLIUM MAP
 # ============================================================
@@ -466,11 +478,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 m = folium.Map(
     location=[22.5, 72.5],
     zoom_start=7,
     tiles="CartoDB dark_matter"
 )
+
 
 # ============================================================
 # MAP MARKERS
@@ -538,7 +552,8 @@ for _, row in final_df.iterrows():
         <b>PM10:</b>
         {row['Particulate Matter ≤ 10 µm']} μg/m³<br>
 
-        <b>NH₃:</b> {row['Ammonia']} μg/m³
+        <b>NH₃:</b>
+        {row['Ammonia']} μg/m³
 
     </div>
     """
@@ -562,6 +577,7 @@ for _, row in final_df.iterrows():
 
     ).add_to(m)
 
+
 # ============================================================
 # DISPLAY MAP
 # ============================================================
@@ -571,6 +587,7 @@ st_folium(
     width=None,
     height=650
 )
+
 
 # ============================================================
 # FOOTER

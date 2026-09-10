@@ -39,7 +39,7 @@ The project combines **OpenWeather API**, **Pandas**, **Streamlit**, and **Foliu
 ```text
 Weather-Air-Quality-Dashboard/
 │
-├── weather.py          # Main Streamlit application
+├── app.py              # Main Streamlit application
 ├── requirements.txt    # Python dependencies
 └── README.md           # Project documentation
 ```
@@ -68,7 +68,7 @@ For local development, the application can be configured to read the key from an
 ### 4️⃣ Run the dashboard ▶️
 
 ```bash
-python -m streamlit run weather.py
+python -m streamlit run app.py
 ```
 
 ## 📊 Dashboard Includes
