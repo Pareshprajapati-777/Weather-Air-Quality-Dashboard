@@ -8,6 +8,10 @@ This interactive dashboard fetches live weather and air-quality information for 
 
 The project combines **OpenWeather API**, **Pandas**, **Streamlit**, and **Folium** to turn live environmental data into an easy-to-understand monitoring dashboard.
 
+## 🌐 Live Demo
+
+🚀 **Try the live application:** https://weather-air-quality-dashboard.streamlit.app
+
 ## ✨ Features
 
 - 🌡️ Real-time temperature monitoring
